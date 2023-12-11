@@ -1,6 +1,33 @@
+body {
+  background-color: rgb(216, 211, 211);
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+}
+
+#header {
+  border: 1px solid green;
+}
+
+nav {
+  border: 1px solid yellow;
+}
+
+main {
+  border: 1px solid white;
+}
+
+#article-filter {
+  border: 1px solid grey;
+
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#article-container {
+  border: 1px solid red;
 }
