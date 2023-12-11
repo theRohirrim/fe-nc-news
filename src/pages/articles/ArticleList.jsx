@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { getArticles } from "../../components/utils/api"
+import ArticleCard from "./ArticleCard"
 
 const ArtcilesList = () => {
     const [articles, setArticles] = useState([])
@@ -23,8 +24,12 @@ const ArtcilesList = () => {
     }
     
     return (
-        <div id="article-container">
-            <h2>ARTICLES LIST</h2>
+        <div className="article-container">
+            {articles.map((article) => {
+            return (
+                <ArticleCard key={article.article_id.toString()} article={article}/>
+            )
+           })}
         </div>
     )
 }

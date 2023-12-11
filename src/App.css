@@ -30,4 +30,20 @@ main {
 
 #article-container {
   border: 1px solid red;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  justify-content: center;
+}
+
+.article-card {
+  border: 1px solid orange;  
+}
+
+.article-card img {
+  height: 40vh;
+
+  max-width: 95%;
 }
