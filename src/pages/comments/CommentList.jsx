@@ -4,7 +4,7 @@ import CommentCard from "./CommentCard"
 
 const CommentList = (prop) => {
     const [comments, setComments] = useState([])
-    const { article_id } = props
+    const { article_id } = prop
 
     useEffect(() => {
         getCommentsByArticleId(article_id)
@@ -21,3 +21,5 @@ const CommentList = (prop) => {
         </div>
     )
 }
+
+export default CommentList
