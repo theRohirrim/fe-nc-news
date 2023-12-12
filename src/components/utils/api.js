@@ -26,6 +26,10 @@ export const getArticles = (queries) => {
     })
 }
 
+export const updateVotes = (article_id, voteChange) => {
+    return api.patch(`/articles/${article_id}`, {inc_votes: voteChange})
+}
+
 export const getArticleById = (article_id) => {
     return api.get(`/articles/${article_id}`)
     .then((res) => {
