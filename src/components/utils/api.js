@@ -25,3 +25,10 @@ export const getArticles = (queries) => {
         return res.data
     })
 }
+
+export const updateVotes = (article_id, voteChange) => {
+    return api.patch(`/articles/${article_id}`, {inc_votes: voteChange})
+    .then((res) => {
+        return res.data
+    })
+}
