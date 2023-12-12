@@ -28,9 +28,7 @@ const ArtcilesList = () => {
         <div className="article-container">
             {articles.map((article) => {
             return (
-                <Link key={article.article_id} to={`/articles/${article.article_id}`}>
-                    <ArticleCard key={article.article_id.toString()} article={article}/>
-                </Link>
+                    <ArticleCard key={article.article_id.toString()} article={article} linkActive={true}/>
             )
            })}
         </div>

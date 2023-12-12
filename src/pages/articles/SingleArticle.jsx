@@ -25,7 +25,7 @@ const SingleArticle = () => {
 
     return (
         <>
-        <ArticleCard article={article}>
+        <ArticleCard article={article} linkActive={false}>
             <div className="article-body">
                 <p>{article.body}</p>
             </div>
