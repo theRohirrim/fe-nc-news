@@ -26,8 +26,10 @@ export const getArticles = (queries) => {
     })
 }
 
-export const updateVotes = (article_id, voteChange) => {
-    return api.patch(`/articles/${article_id}`, {inc_votes: voteChange})
+export const updateVotes = (itemType, id, voteChange) => {
+    if (itemType === 'article') return api.patch(`/articles/${id}`, {inc_votes: voteChange})
+
+    if (itemType === 'comment') return api.patch(`/comments/${id}`, {inc_votes: voteChange})
 }
 
 export const getArticleById = (article_id) => {
