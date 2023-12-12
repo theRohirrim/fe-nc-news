@@ -1,13 +1,12 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { updateVotes } from "../../components/utils/api"
 
 const ArticleCard = (props) => {
-    const [article, setArticle] = useState(props.article)
     const [err, setErr] = useState(null)
+    let [currentVotes, setVotes] = useState(props.article.votes)
 
     const {article_id, title, author, topic, created_at, votes, article_img_url, comment_count} = props.article
     // Votes state for optimistic rendering
-    let [currentVotes, setVotes] = useState(votes)
 
     const handleVoteClick = (event) => {
         const voteChange = event.target.id.includes('upvote') ? 1 : -1
