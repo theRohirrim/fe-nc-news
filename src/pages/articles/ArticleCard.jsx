@@ -9,7 +9,7 @@ const ArticleCard = (props) => {
 
     const { article_id, title, author, topic, created_at, votes, article_img_url, comment_count} = props.article
     
-    // // States to limit multiple clicks from the user
+    // States to limit multiple clicks from the user
     const [upvoteClicked, setUpvoteClicked] = useState(false)
     const [downvoteClicked, setDownvoteClicked] = useState(false)
 
@@ -42,7 +42,7 @@ const ArticleCard = (props) => {
             setErr(null);
     
             // Perform API request in background
-            updateVotes(article_id, voteChange)
+            updateVotes('article', article_id, voteChange)
             .then(() => {
                 // disable button via state upon successful change
                 if (event.target.className.includes('upvote')) {
@@ -69,7 +69,7 @@ const ArticleCard = (props) => {
             setErr(null);
 
             // Perform API request in background
-            updateVotes(article_id, voteChange)
+            updateVotes('article', article_id, voteChange)
             .then(() => {
                 // Undo the disabling
                 if (event.target.className.includes('upvote')) {
