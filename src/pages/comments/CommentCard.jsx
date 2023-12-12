@@ -1,4 +1,4 @@
-const CommentCard = (comment) => {
+const CommentCard = ({comment}) => {
     const { votes, created_at, author, body } = comment
 
     return (

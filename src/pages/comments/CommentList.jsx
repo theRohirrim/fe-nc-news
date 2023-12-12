@@ -2,9 +2,9 @@ import { useEffect, useState } from "react"
 import { getCommentsByArticleId } from "../../components/utils/api"
 import CommentCard from "./CommentCard"
 
-const CommentList = (prop) => {
+const CommentList = (props) => {
     const [comments, setComments] = useState([])
-    const { article_id } = prop
+    const { article_id } = props
 
     useEffect(() => {
         getCommentsByArticleId(article_id)
