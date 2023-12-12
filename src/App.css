@@ -48,6 +48,10 @@ main {
   text-decoration: none;
 }
 
+.disabled-button {
+  background-color: azure;
+}
+
 .article-card img {
   height: 40vh;
 
