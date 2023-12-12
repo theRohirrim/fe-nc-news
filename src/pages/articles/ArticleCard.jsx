@@ -1,13 +1,13 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { updateVotes } from "../../components/utils/api"
+import { Link } from "react-router-dom"
 
 const ArticleCard = (props) => {
-    const [article, setArticle] = useState(props.article)
     const [err, setErr] = useState(null)
+    let [currentVotes, setVotes] = useState(props.article.votes)
 
-    const {article_id, title, author, topic, created_at, votes, article_img_url, comment_count} = article
+    const { article_id, title, author, topic, created_at, votes, article_img_url, comment_count} = props.article
     // Votes state for optimistic rendering
-    let [currentVotes, setVotes] = useState(votes)
 
     const handleVoteClick = (event) => {
         const voteChange = event.target.id.includes('upvote') ? 1 : -1
@@ -25,12 +25,14 @@ const ArticleCard = (props) => {
     }
 
     return (
-        <div className="article-card">
-            <div className="article-card-header">
-                <h3>{title}</h3>
-                <p>by {author}</p>
-            </div>
-            <img src={article_img_url} />
+            <div className="article-card">
+            <Link className={props.linkActive ? 'active-link' : 'disabled-link'}to={`/articles/${article_id}`}>
+                <div className="article-card-header">
+                    <h3>{title}</h3>
+                    <p>by {author}</p>
+                </div>
+                <img src={article_img_url} />
+            </Link>
             <div className="article-card-footer">
                 <div className="votes-container">
                     <p>{currentVotes} votes</p>

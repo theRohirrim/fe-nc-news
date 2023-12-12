@@ -6,17 +6,26 @@ import CommentList from "../comments/CommentList"
 
 const SingleArticle = () => {
     const [article, setArticle] = useState({})
+    const [isLoading, setIsLoading] = useState(true)
     const { article_id } = useParams()
 
     useEffect(() => {
         getArticleById(article_id).then((articleData) => {
           setArticle(articleData.article);
+          setIsLoading(false)
         });
-    }, [article]);
+    }, []);
+
+
+    if (isLoading) {
+        return (
+            <h1 className="loading">Loading...</h1>
+        )
+    }
 
     return (
         <>
-        <ArticleCard article={article}>
+        <ArticleCard article={article} linkActive={false}>
             <div className="article-body">
                 <p>{article.body}</p>
             </div>
