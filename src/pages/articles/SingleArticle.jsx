@@ -16,7 +16,11 @@ const SingleArticle = () => {
 
     return (
         <>
-        <ArticleCard article={article} />
+        <ArticleCard article={article}>
+            <div className="article-body">
+                <p>{article.body}</p>
+            </div>
+        </ArticleCard>
         <CommentList article_id={article_id}/>
         </>
     )

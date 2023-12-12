@@ -12,8 +12,7 @@ const ArticleCard = (props) => {
                 <p>{comment_count} comments</p>
                 <p>created at {created_at}</p>
             </div>
-            
-
+            {props.children}
         </div>
     )
 }

@@ -5,7 +5,11 @@ const SingleArticleCard = (prop) => {
 
     return (
         <div className="single-article-card">
-            <ArticleCard />
+            <ArticleCard>
+                <div className="article-body">
+                    <p>{article.body}</p>
+                </div>
+            </ArticleCard>
         </div>
     )
 }
