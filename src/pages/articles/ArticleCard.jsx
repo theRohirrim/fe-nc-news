@@ -5,7 +5,7 @@ const ArticleCard = (props) => {
     const [article, setArticle] = useState(props.article)
     const [err, setErr] = useState(null)
 
-    const {article_id, title, author, topic, created_at, votes, article_img_url, comment_count} = article
+    const {article_id, title, author, topic, created_at, votes, article_img_url, comment_count} = props.article
     // Votes state for optimistic rendering
     let [currentVotes, setVotes] = useState(votes)
 
