@@ -4,6 +4,22 @@ const api = axios.create({
     baseURL: "https://northcoders-news-r0zu.onrender.com/api"
 })
 
+// Allow user to press enter on the collapsible and cancel buttons
+export const enableEnterPress = () => {
+    const keypressButtons = [].slice.call(document.getElementsByClassName('enter-press'))
+    // Apply event listener when buttons have loaded
+    if (keypressButtons.length !== 0) {
+        keypressButtons.forEach((button) => {
+            button.addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                  event.preventDefault();
+                  button.click();
+                }
+              });
+        })
+    }
+}
+
 export const getArticles = (queries) => {
     let urlSuffix = "/articles"
 
@@ -44,4 +60,8 @@ export const getCommentsByArticleId = (article_id) => {
     .then((res) => {
         return res.data
     })
+}
+
+export const deleteCommentByCommentId = (comment_id) => {
+    return api.delete(`/comments/${comment_id}`)
 }
