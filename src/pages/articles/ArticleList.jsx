@@ -3,20 +3,14 @@ import { getArticles } from "../../components/utils/api"
 import ArticleCard from "./ArticleCard"
 import { Link } from "react-router-dom"
 
-const ArtcilesList = () => {
-    const [articles, setArticles] = useState([])
+const ArtcilesList = ({articles}) => {
     const [isLoading, setIsLoading] = useState(true)
+    const [reRender, setReRender] = useState(true)
 
     useEffect(() => {
-        getArticles({})
-        .then((res) => {
-            setArticles(res.articles)
-            setIsLoading(false)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    }, [])
+        if (articles) setIsLoading(false)
+        setReRender(!reRender)
+    }, [articles])
 
     if (isLoading) {
         return (
