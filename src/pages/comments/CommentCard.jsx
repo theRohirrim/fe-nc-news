@@ -93,7 +93,9 @@ const CommentCard = ({comment, setComments}) => {
 
         // Optimistically delete
         setComments((currentComments) => {
+            console.log(currentComments)
             return currentComments.map((comment) => {
+                console.log(comment.author, "comment_id ", comment.comment_id)
                 if (comment.comment_id !== comment_id) return comment
             })
         })
