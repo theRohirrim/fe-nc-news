@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { convertDateTime, updateVotes } from "../../components/utils/api"
+import { updateVotes } from "../../components/utils/api"
 import { Link } from "react-router-dom"
 
 const ArticleCard = (props) => {
@@ -102,7 +102,7 @@ const ArticleCard = (props) => {
                     <button id={`article-${article_id}-downvote-button`} onClick={handleVoteClick} className={`downvote-button ${downvoteClicked ? 'disabled-button' : ''}`}>-</button>
                 </div>
                 <p>{comment_count} comments</p>
-                <p>created {convertDateTime(created_at)} ago</p>
+                <p>created at {created_at}</p>
             </div>
             {props.children}
         </div>

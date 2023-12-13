@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react"
-import { getCommentsByArticleId } from "../../components/utils/api" 
+import { getCommentsByArticleId } from "../../components/utils/api"
 import CommentCard from "./CommentCard"
 import CommentForm from "./CommentForm"
 
 const CommentList = (props) => {
     const [comments, setComments] = useState([])
-    const [err, setErr] = useState(null)
     const { article_id } = props
 
     useEffect(() => {
@@ -17,12 +16,9 @@ const CommentList = (props) => {
 
     return (
         <div id="comment-container">
-            <CommentForm article_id={article_id} setComments={setComments} setErr={setErr}/>
-            {err && 
-            <h3>{err}</h3>
-            }
+            <CommentForm article_id={article_id} setComments={setComments}/>
             {comments.map((comment) => {
-                return <CommentCard key={comment.comment_id} comment={comment} setComments={setComments} />
+                return <CommentCard key={comment.comment_id} comment={comment} />
             })}
         </div>
     )

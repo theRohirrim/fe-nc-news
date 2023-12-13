@@ -58,6 +58,17 @@ main {
   max-width: 95%;
 }
 
+#comment-form-container { 
+  border: solid 1px purple;
+}
+
+#comment-body-input {
+  height: 20vh;
+  width: 60vw;
+
+  text-align: left;
+}
+
 .comment-card {
   border: solid 1px blue;
 }
