@@ -18,32 +18,37 @@ const CommentForm = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         setErr(null)
-
-        // Build comment
-        const comment = {
-            article_id: article_id,
-            author: currentUser,
-            body: input,
-            created_at: 'Now',
-            votes: 0
-        }
-
-
-        // Render optimistically
-        setComments((currentComments) => {
-            return [comment, ...currentComments]
-        })
-
-        // Send api request in the background
-        postCommentByArticleId(input, article_id, currentUser)
-        .catch((err) => {
-            setErr('Could not post your comment at this time, please try again later')
-            //Undo optimistic changes if error occurs
+        // Attempt post if input is not empty
+        if (input) {
+            // Build comment
+            const comment = {
+                article_id: article_id,
+                author: currentUser,
+                body: input,
+                created_at: 'Now',
+                votes: 0
+            }
+    
+    
+            // Render optimistically
             setComments((currentComments) => {
-                currentComments.shift()
-                return currentComments
+                return [comment, ...currentComments]
             })
-        })
+    
+            // Send api request in the background
+            postCommentByArticleId(input, article_id, currentUser)
+            .catch((err) => {
+                setErr('Could not post your comment at this time, please try again later')
+                //Undo optimistic changes if error occurs
+                setComments((currentComments) => {
+                    currentComments.shift()
+                    return currentComments
+                })
+            })
+        } else {
+            // Alert user with an error they cannot post an empty comment
+            setErr("Cannot post an empty comment")
+        }
     }
 
     // Allow user to press enter on the collapsible and cancel buttons

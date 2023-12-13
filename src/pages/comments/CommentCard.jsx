@@ -97,7 +97,7 @@ const CommentCard = ({comment}) => {
                 <button id={`comment-${comment_id}-downvote-button`} onClick={handleVoteClick} className={`downvote-button ${downvoteClicked ? 'disabled-button' : ''}`}>-</button>
             </div>
                 <p>by {author}</p>
-                <p>created at {convertDateTime(created_at)}</p>
+                <p>created {convertDateTime(created_at)} ago</p>
             </div>
         </div>
     )
