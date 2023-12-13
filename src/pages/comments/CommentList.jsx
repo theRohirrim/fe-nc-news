@@ -5,6 +5,7 @@ import CommentForm from "./CommentForm"
 
 const CommentList = (props) => {
     const [comments, setComments] = useState([])
+    const [err, setErr] = useState(null)
     const { article_id } = props
 
     useEffect(() => {
@@ -16,7 +17,10 @@ const CommentList = (props) => {
 
     return (
         <div id="comment-container">
-            <CommentForm article_id={article_id} setComments={setComments}/>
+            <CommentForm article_id={article_id} setComments={setComments} setErr={setErr}/>
+            {err && 
+            <h3>{err}</h3>
+            }
             {comments.map((comment) => {
                 return <CommentCard key={comment.comment_id} comment={comment} />
             })}
