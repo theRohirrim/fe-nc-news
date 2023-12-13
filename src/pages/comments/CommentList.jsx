@@ -22,7 +22,7 @@ const CommentList = (props) => {
             <h3>{err}</h3>
             }
             {comments.map((comment) => {
-                return <CommentCard key={comment.comment_id} comment={comment} />
+                return <CommentCard key={comment.comment_id} comment={comment} setComments={setComments} />
             })}
         </div>
     )

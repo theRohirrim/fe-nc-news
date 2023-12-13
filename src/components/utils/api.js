@@ -31,11 +31,22 @@ export const convertDateTime = (dateTime) => {
       return Math.floor(interval) + " minutes";
     }
     return Math.floor(seconds) + " seconds";
+}
 
-    // // Get everything up until GMT
-    // const regex = /.+?(?=GMT)/
-
-    // return date.toString().match(regex)[0]
+// Allow user to press enter on the collapsible and cancel buttons
+export const enableEnterPress = () => {
+    const keypressButtons = [].slice.call(document.getElementsByClassName('enter-press'))
+    // Apply event listener when buttons have loaded
+    if (keypressButtons.length !== 0) {
+        keypressButtons.forEach((button) => {
+            button.addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                  event.preventDefault();
+                  button.click();
+                }
+              });
+        })
+    }
 }
 
 export const getArticles = (queries) => {
@@ -82,4 +93,8 @@ export const getCommentsByArticleId = (article_id) => {
 
 export const postCommentByArticleId = (body, article_id, username) => {
     return api.post(`/articles/${article_id}/comments`, {body: body, username: username})
+}
+
+export const deleteCommentByCommentId = (comment_id) => {
+    return api.delete(`/comments/${comment_id}`)
 }
