@@ -4,6 +4,15 @@ const api = axios.create({
     baseURL: "https://northcoders-news-r0zu.onrender.com/api"
 })
 
+export const convertDateTime = (dateTime) => {
+    let date = new Date(dateTime)
+
+    // Get everything up until GMT
+    const regex = /.+?(?=GMT)/
+
+    return date.toString().match(regex)[0]
+}
+
 export const getArticles = (queries) => {
     let urlSuffix = "/articles"
 

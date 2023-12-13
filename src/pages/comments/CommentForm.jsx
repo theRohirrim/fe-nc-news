@@ -17,7 +17,6 @@ const CommentForm = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log('enters submit')
         setErr(null)
 
         // Build comment
@@ -29,11 +28,9 @@ const CommentForm = (props) => {
             votes: 0
         }
 
-        console.log('built comment', comment)
 
         // Render optimistically
         setComments((currentComments) => {
-            console.log([comment, ...currentComments])
             return [comment, ...currentComments]
         })
 

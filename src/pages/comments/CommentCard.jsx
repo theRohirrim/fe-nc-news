@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { updateVotes } from "../../components/utils/api"
+import { convertDateTime, updateVotes } from "../../components/utils/api"
 
 const CommentCard = ({comment}) => {
     const [err, setErr] = useState(null)
@@ -97,7 +97,7 @@ const CommentCard = ({comment}) => {
                 <button id={`comment-${comment_id}-downvote-button`} onClick={handleVoteClick} className={`downvote-button ${downvoteClicked ? 'disabled-button' : ''}`}>-</button>
             </div>
                 <p>by {author}</p>
-                <p>created at {created_at}</p>
+                <p>created at {convertDateTime(created_at)}</p>
             </div>
         </div>
     )
