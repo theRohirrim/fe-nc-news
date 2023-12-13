@@ -3,10 +3,11 @@ import ArticleFilter from "./ArticleFilter"
 import ArtcileList from "./ArticleList"
 
 const Articles = () => {
+    const [currentFilter, setFilter] = useState('')
     return (
         <main>
-            <ArticleFilter />
-            <ArtcileList />
+            <ArticleFilter setFilter={setFilter}/>
+            <ArtcileList currentFilter={currentFilter}/>
         </main>
     )
 }
