@@ -5,8 +5,8 @@ const CommentCard = ({comment, setComments}) => {
     const [err, setErr] = useState(null)
     // Logged in user emables deleting of comments they have made
     const currentUser = 'weegembump';
-
     const { comment_id, votes, created_at, author, body } = comment
+    
     // Votes state for optimistic rendering
     let [currentVotes, setVotes] = useState(votes)
     // States to limit multiple clicks from the user
@@ -91,9 +91,10 @@ const CommentCard = ({comment, setComments}) => {
         event.preventDefault();
         setErr(null)
 
+        let fullComments;
         // Optimistically delete
         setComments((currentComments) => {
-            console.log(currentComments)
+            fullComments = currentComments
             return currentComments.filter((comment) => {
                 console.log(comment.author, "comment_id ", comment.comment_id)
                 return comment.comment_id !== comment_id
@@ -103,6 +104,10 @@ const CommentCard = ({comment, setComments}) => {
         // Send API request in the background
         deleteCommentByCommentId(comment_id)
         .catch((err) => {
+            // Reverse optimistic changes
+            setComments(fullComments)
+
+
             setErr("Could not delete your comment at this time. Please try again later")
         })
     }
