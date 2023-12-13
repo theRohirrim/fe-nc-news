@@ -16,7 +16,7 @@ const CommentList = (props) => {
     return (
         <div id="comment-container">
             {comments.map((comment) => {
-                return <CommentCard key={comment.comment_id} comment={comment} />
+                return <CommentCard key={comment.comment_id} comment={comment} setComments={setComments} />
             })}
         </div>
     )

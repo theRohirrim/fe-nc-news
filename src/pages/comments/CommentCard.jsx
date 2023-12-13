@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react"
-import { updateVotes } from "../../components/utils/api"
+import { useContext, useEffect, useState } from "react"
+import { deleteCommentByCommentId, enableEnterPress, updateVotes } from "../../components/utils/api"
 
-const CommentCard = ({comment}) => {
+const CommentCard = ({comment, setComments}) => {
     const [err, setErr] = useState(null)
+    // Logged in user emables deleting of comments they have made
+    const currentUser = 'weegembump';
     const { comment_id, votes, created_at, author, body } = comment
+    
     // Votes state for optimistic rendering
     let [currentVotes, setVotes] = useState(votes)
     // States to limit multiple clicks from the user
@@ -84,17 +87,50 @@ const CommentCard = ({comment}) => {
         }
     }
 
+    const onDelete = (event) => {
+        event.preventDefault();
+        setErr(null)
 
+        let fullComments;
+        // Optimistically delete
+        setComments((currentComments) => {
+            fullComments = currentComments
+            return currentComments.filter((comment) => {
+                console.log(comment.author, "comment_id ", comment.comment_id)
+                return comment.comment_id !== comment_id
+            })
+        })
+
+        // Send API request in the background
+        deleteCommentByCommentId(comment_id)
+        .catch((err) => {
+            // Reverse optimistic changes
+            setComments(fullComments)
+
+
+            setErr("Could not delete your comment at this time. Please try again later")
+        })
+    }
+
+    // Enable buttons to be pressed with enter
+    enableEnterPress();
 
     return (
         <div className="comment-card">
+            {author === currentUser &&
+            <div className="deleteButton">
+                <button className="enter-press" onClick={onDelete}>Delete</button>
+            </div>
+            }
             <p>{body}</p>
             <div className="comment-footer">
+                <div className="error-container">
+                {err ? <p>{err}</p> : null}
+                </div>
             <div className="votes-container">
                 <p>{currentVotes} votes</p>
-                {err ? <p>{err}</p> : null}
-                <button id={`comment-${comment_id}-upvote-button`} onClick={handleVoteClick} className={`upvote-button ${upvoteClicked ? 'disabled-button' : ''}`}>+</button>
-                <button id={`comment-${comment_id}-downvote-button`} onClick={handleVoteClick} className={`downvote-button ${downvoteClicked ? 'disabled-button' : ''}`}>-</button>
+                <button id={`comment-${comment_id}-upvote-button`} onClick={handleVoteClick} className={`upvote-button enter-press ${upvoteClicked ? 'disabled-button' : ''}`}>+</button>
+                <button id={`comment-${comment_id}-downvote-button`} onClick={handleVoteClick} className={`downvote-button enter-press ${downvoteClicked ? 'disabled-button' : ''}`}>-</button>
             </div>
                 <p>by {author}</p>
                 <p>created at {created_at}</p>
