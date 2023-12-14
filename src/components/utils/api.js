@@ -64,7 +64,7 @@ export const getArticles = (queries) => {
             urlSuffix += queryStrings.join('&')
         }
     }
-
+    
     return api.get(urlSuffix)
     .then((res) => {
         return res.data
@@ -97,4 +97,11 @@ export const postCommentByArticleId = (body, article_id, username) => {
 
 export const deleteCommentByCommentId = (comment_id) => {
     return api.delete(`/comments/${comment_id}`)
+}
+
+export const getTopics = () => {
+    return api.get(`/topics`)
+    .then((res) => {
+        return res.data
+    })
 }
