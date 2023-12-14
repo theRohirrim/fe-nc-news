@@ -17,8 +17,6 @@ const ArtcilesList = ({articles}) => {
             <h1 className="loading">Loading...</h1>
         )
     }
-
-    console.log('article list', articles)
     
     return (
         <div className="article-container">
