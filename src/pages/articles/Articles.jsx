@@ -10,16 +10,12 @@ const Articles = () => {
     const [articles, setArticles] = useState([])
 
     useEffect(() => {
-        if (searchParams.size !== 0) {
-            setFilter((currentFilter) => {
-                return {
-                    ...currentFilter,
-                    topic: searchParams.get('topic')
-                }
-            })
-        } else {
-            setFilter({})
-        }
+        setFilter((currentFilter) => {
+            return {
+                ...currentFilter,
+                topic: searchParams.get('topic')
+            }
+        })
     }, [searchParams])
 
     useEffect(() => {
@@ -29,11 +25,9 @@ const Articles = () => {
         })
     }, [currentFilter])
 
-    console.log(articles)
-
     return (
         <main>
-            <ArticleFilter currentFilter={currentFilter} setArticles={setArticles} searchParams={searchParams} setSearchParams={setSearchParams}/>
+            <ArticleFilter currentFilter={currentFilter} searchParams={searchParams} setSearchParams={setSearchParams}/>
             <ArtcileList articles={articles}/>
         </main>
     )
