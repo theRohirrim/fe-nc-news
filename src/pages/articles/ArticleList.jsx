@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import ArticleCard from "./ArticleCard"
 
-const ArtcilesList = ({articles}) => {
+const ArticleList = ({articles}) => {
     const [isLoading, setIsLoading] = useState(true)
     const [reRender, setReRender] = useState(true)
 
@@ -27,4 +27,4 @@ const ArtcilesList = ({articles}) => {
     )
 }
 
-export default ArtcilesList
+export default ArticleList

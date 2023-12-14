@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { deleteCommentByCommentId, enableEnterPress, updateVotes } from "../../components/utils/api"
+import { convertDateTime, deleteCommentByCommentId, enableEnterPress, updateVotes } from "../../components/utils/api"
 
 const CommentCard = ({comment, setComments}) => {
     const [err, setErr] = useState(null)

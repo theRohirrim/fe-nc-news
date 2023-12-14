@@ -11,11 +11,21 @@ const Articles = () => {
 
     useEffect(() => {
         setFilter((currentFilter) => {
+            // Default the sort by and order
             return {
                 ...currentFilter,
-                topic: searchParams.get('topic')
+                topic: searchParams.get('topic'),
+                sort_by: 'created_at',
+                order: 'asc'
             }
         })
+
+        // Copy existing queries to avoid mutation, and set search parameters
+        const newParams = new URLSearchParams(searchParams);
+        // Set the topic query
+        newParams.set('sort_by', 'created_at');
+        newParams.set('order', 'asc');
+        setSearchParams(newParams);  
     }, [searchParams])
 
     useEffect(() => {
