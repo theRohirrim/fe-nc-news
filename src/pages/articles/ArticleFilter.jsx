@@ -34,15 +34,33 @@ const ArticleFilter = ({ searchParams, setSearchParams }) => {
             newParams.set('topic', selectedOption.value);
             setSearchParams(newParams);        
         }
-      };
+    };
+
+    const handleSortChange = (selectedOption) => {
+        
+    }  
 
     return (
         <div id="article-filter">
             <div id="topic-select-container">
                 <h3>Topic</h3>
-                <Select onChange={handleTopicChange} id="topic-dropdown" options={[{value: '', label: 'All'}, ...topicOptions]} />
+                <Select 
+                id="topic-dropdown" 
+                onChange={handleTopicChange} 
+                options={[{value: '', label: 'All'}, ...topicOptions]}
+                defaultValue={{value: '', label: 'All'}} 
+                />
             </div>
-            <h3>Most Viewed</h3>
+            <div id="sort-select-container">
+                <h3>Sort By</h3>
+                <div id="sort-dropdown-container">
+                    <Select 
+                    id="sort-by-dropdown"
+
+                    />
+                    <Select id="order-dropdown"/>
+                </div>
+            </div>
         </div>
     )
 }
