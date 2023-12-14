@@ -5,8 +5,24 @@ import { useNavigate } from "react-router-dom";
 
 const ArticleFilter = ({ currentFilter, searchParams, setSearchParams }) => {
     const [topicOptions, setTopics] = useState([])
+
+    const sortByOptions = [
+        {value: 'created_at', label: 'date'},
+        {value: 'votes', label: 'votes'},
+        {value: 'comment_count', label: 'comments'}
+    ]
+
+    const orderOptions = [
+        {value: 'asc', label: 'ascending'},
+        {value: 'desc', label: 'descending'}
+    ]
+
     const [selectDefaults, setDefaults] = useState({
-        topicDefault: {value: searchParams.get('topic'), label: searchParams.get('topic') ? searchParams.get('topic') : 'all'}
+        topicDefault: {value: searchParams.get('topic'), label: searchParams.get('topic') ? searchParams.get('topic') : 'all'},
+
+        sortByDefault: {value: searchParams.get('sort_by'), label: searchParams.get('sort_by') ? sortByOptions.find((obj) => obj.value === searchParams.get('sort_by')).label : 'date'},
+
+        orderDefault: {value: searchParams.get('order'), label: searchParams.get('order') ? orderOptions.find((obj) => obj.value === searchParams.get('order')).label : 'descending'}
     })
     // Navigate to the correct url with params when filters are changed
     const navigate = useNavigate();
@@ -20,6 +36,8 @@ const ArticleFilter = ({ currentFilter, searchParams, setSearchParams }) => {
             })
             setTopics([{value: '', label: 'all'}, ...topics])
         })
+
+        
     }, [searchParams])
 
     const handleTopicChange = (selectedOption) => {
@@ -44,6 +62,10 @@ const ArticleFilter = ({ currentFilter, searchParams, setSearchParams }) => {
             console.log("recognises label")
             // Set the topic query
             newParams.set('sort_by', selectedOption.value);
+
+            // Set order to desc if param does not exist
+            if (!newParams.get('order')) newParams.set('order', 'desc')
+
             setSearchParams(newParams); 
         }
         if (['ascending', 'descending'].includes(selectedOption.label)) {
@@ -53,17 +75,6 @@ const ArticleFilter = ({ currentFilter, searchParams, setSearchParams }) => {
             setSearchParams(newParams); 
         }
     }
-    
-    const sortByOptions = [
-        {value: 'created_at', label: 'date'},
-        {value: 'votes', label: 'votes'},
-        {value: 'comment_count', label: 'comments'}
-    ]
-
-    const orderOptions = [
-        {value: 'asc', label: 'ascending'},
-        {value: 'desc', label: 'descending'}
-    ]
 
     return (
         <div id="article-filter">
@@ -83,13 +94,13 @@ const ArticleFilter = ({ currentFilter, searchParams, setSearchParams }) => {
                     id="sort-by-dropdown"
                     onChange={handleSortChange}
                     options={sortByOptions}
-                    defaultValue={{value: 'created_at', label: 'date'}}
+                    defaultValue={selectDefaults.sortByDefault}
                     />
                     <Select 
                     id="order-dropdown"
                     onChange={handleSortChange}
                     options={orderOptions}
-                    defaultValue={{value: 'asc', label: 'ascending'}}
+                    defaultValue={selectDefaults.orderDefault}
                     />
                 </div>
             </div>

@@ -65,6 +65,7 @@ export const getArticles = (queries) => {
         }
     }
 
+    console.log(urlSuffix)
     return api.get(urlSuffix)
     .then((res) => {
         return res.data
