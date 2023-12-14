@@ -36,7 +36,22 @@ const ArticleFilter = ({ currentFilter, searchParams, setSearchParams }) => {
     };
 
     const handleSortChange = (selectedOption) => {
+        console.log(selectedOption)
+        // Copy existing queries to avoid mutation, and set search parameters
+        const newParams = new URLSearchParams(searchParams);
         
+        if (['date', 'votes', 'comments'].includes(selectedOption.label)) {
+            console.log("recognises label")
+            // Set the topic query
+            newParams.set('sort_by', selectedOption.value);
+            setSearchParams(newParams); 
+        }
+        if (['ascending', 'descending'].includes(selectedOption.label)) {
+            console.log("recognises label")
+            // Set the topic query
+            newParams.set('order', selectedOption.value);
+            setSearchParams(newParams); 
+        }
     }
     
     const sortByOptions = [
@@ -49,7 +64,7 @@ const ArticleFilter = ({ currentFilter, searchParams, setSearchParams }) => {
         {value: 'asc', label: 'ascending'},
         {value: 'desc', label: 'descending'}
     ]
-    
+
     return (
         <div id="article-filter">
             <div id="topic-select-container">

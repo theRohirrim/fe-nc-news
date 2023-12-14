@@ -17,7 +17,7 @@ const CommentList = (props) => {
 
     return (
         <div id="comment-container">
-            <CommentForm article_id={article_id} setComments={setComments} setErr={setErr}/>
+            <CommentForm key="comment-form" article_id={article_id} setComments={setComments} setErr={setErr}/>
             {err && 
             <h3>{err}</h3>
             }

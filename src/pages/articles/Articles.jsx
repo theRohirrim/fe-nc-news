@@ -15,8 +15,8 @@ const Articles = () => {
             return {
                 ...currentFilter,
                 topic: searchParams.get('topic'),
-                sort_by: 'created_at',
-                order: 'asc'
+                sort_by: searchParams.get('sort_by'),
+                order: searchParams.get('order')
             }
         })
 

@@ -96,7 +96,6 @@ const CommentCard = ({comment, setComments}) => {
         setComments((currentComments) => {
             fullComments = currentComments
             return currentComments.filter((comment) => {
-                console.log(comment.author, "comment_id ", comment.comment_id)
                 return comment.comment_id !== comment_id
             })
         })
