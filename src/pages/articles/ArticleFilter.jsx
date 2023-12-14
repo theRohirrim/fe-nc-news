@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 
 const ArticleFilter = ({ searchParams, setSearchParams }) => {
     const [topicOptions, setTopics] = useState([])
-    const [topicSelected, setTopicSelected] = useState(null)
     // Navigate to the correct url with params when filters are changed
     const navigate = useNavigate();
     // Get topics to apply as options for the dropdown select
@@ -19,18 +18,13 @@ const ArticleFilter = ({ searchParams, setSearchParams }) => {
     }, [])
 
     const handleTopicChange = (selectedOption) => {
-        setTopicSelected(selectedOption.value);
-
         // If topic is all, navigate to home page
         if (selectedOption.value === '') {
             navigate('/')
-        } else {
-            //Navigate to the new url
-            navigate(`/articles?topic=${selectedOption.value}`)
-    
-            // copy existing queries to avoid mutation
+        } else {    
+            // Copy existing queries to avoid mutation, and set search parameters
             const newParams = new URLSearchParams(searchParams);
-            // set the topic query
+            // Set the topic query
             newParams.set('topic', selectedOption.value);
             setSearchParams(newParams);        
         }
@@ -47,8 +41,8 @@ const ArticleFilter = ({ searchParams, setSearchParams }) => {
                 <Select 
                 id="topic-dropdown" 
                 onChange={handleTopicChange} 
-                options={[{value: '', label: 'All'}, ...topicOptions]}
-                defaultValue={{value: '', label: 'All'}} 
+                options={[{value: '', label: 'all'}, ...topicOptions]}
+                defaultValue={{value: '', label: 'all'}} 
                 />
             </div>
             <div id="sort-select-container">
@@ -56,9 +50,23 @@ const ArticleFilter = ({ searchParams, setSearchParams }) => {
                 <div id="sort-dropdown-container">
                     <Select 
                     id="sort-by-dropdown"
-
+                    onChange={handleSortChange}
+                    options={[
+                        {value: 'created_at', label: 'date'},
+                        {value: 'votes', label: 'votes'},
+                        {value: 'comment_count', label: 'comments'}
+                    ]}
+                    defaultValue={{value: 'created_at', label: 'date'}}
                     />
-                    <Select id="order-dropdown"/>
+                    <Select 
+                    id="order-dropdown"
+                    onChange={handleSortChange}
+                    options={[
+                        {value: 'asc', label: 'ascending'},
+                        {value: 'desc', label: 'descending'}
+                    ]}
+                    defaultValue={{value: 'asc', label: 'ascending'}}
+                    />
                 </div>
             </div>
         </div>

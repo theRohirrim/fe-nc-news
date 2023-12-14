@@ -29,6 +29,8 @@ const Articles = () => {
         })
     }, [currentFilter])
 
+    console.log(articles)
+
     return (
         <main>
             <ArticleFilter currentFilter={currentFilter} setArticles={setArticles} searchParams={searchParams} setSearchParams={setSearchParams}/>
