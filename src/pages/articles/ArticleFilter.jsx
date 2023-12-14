@@ -25,7 +25,7 @@ const ArticleFilter = ({currentFilter, setArticles, searchParams, setSearchParam
     }, [searchParams])
 
     const handleTopicChange = (selectedOption) => {
-        console.log(selectedOption, "selected option")
+        console.log("selected option", selectedOption)
         setTopicSelected(selectedOption.value);
         
         //Navigate to the new url

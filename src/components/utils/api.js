@@ -52,8 +52,6 @@ export const enableEnterPress = () => {
 export const getArticles = (queries) => {
     let urlSuffix = "/articles"
 
-    console.log('api.js queries >>', queries)
-
     if (queries) {
         if (Object.values(queries)) {
             urlSuffix += '?'  
@@ -66,8 +64,7 @@ export const getArticles = (queries) => {
             urlSuffix += queryStrings.join('&')
         }
     }
-
-    console.log(urlSuffix)
+    
     return api.get(urlSuffix)
     .then((res) => {
         return res.data

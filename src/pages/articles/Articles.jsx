@@ -6,20 +6,24 @@ import { getArticles } from "../../components/utils/api"
 
 const Articles = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-    const [currentFilter, setFilter] = useState({
-        topic: searchParams.get('topic')
-    })
+    const [currentFilter, setFilter] = useState({})
     const [articles, setArticles] = useState([])
 
     useEffect(() => {
+        setFilter((currentFilter) => {
+            return {
+                ...currentFilter,
+                topic: searchParams.get('topic')
+            }
+        })
+
         getArticles(currentFilter)
         .then((res) => {
             setArticles(res.articles)
         })
     }, [searchParams])
 
-    console.log(articles)
-
+    console.log('articles', articles)
     return (
         <main>
             <ArticleFilter currentFilter={currentFilter} setArticles={setArticles} searchParams={searchParams} setSearchParams={setSearchParams}/>
