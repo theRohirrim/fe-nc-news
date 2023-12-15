@@ -20,9 +20,11 @@ const CommentList = (props) => {
         <div id="comment-container">
             <CommentForm key="comment-form" article_id={article_id} setComments={setComments} setErr={setErr}/>
             {err ? <Error message={err} /> : null}
-            {comments.map((comment) => {
-                return <CommentCard key={comment.comment_id} comment={comment} setComments={setComments} />
-            })}
+            <div id="comment-holder">
+                {comments.map((comment) => {
+                    return <CommentCard key={comment.comment_id} comment={comment} setComments={setComments} />
+                })}
+            </div>
         </div>
     )
 }

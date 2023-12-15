@@ -71,9 +71,6 @@ const CommentForm = (props) => {
 
     return (
         <form id="comment-form-container" onSubmit={handleSubmit}>
-            <div className="collapsible-container">
-                <button className="collapsible-button enter-press" onClick={handleCollapsible}>Add Comment -</button>
-            </div>
             <textarea id="comment-body-input"
             placeholder="Type your comment here..."
             onChange={handleChange}
