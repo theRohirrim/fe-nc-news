@@ -3,7 +3,7 @@ import { getTopics } from "../../components/utils/api"
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const ArticleFilter = ({ currentFilter, searchParams, setSearchParams }) => {
+const ArticleFilter = ({ searchParams, setSearchParams }) => {
     const [topicOptions, setTopics] = useState([])
 
     const sortByOptions = [
