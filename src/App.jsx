@@ -18,7 +18,7 @@ function App() {
       <Route path='/'element={<Articles/>} />
       <Route path='/articles' element={<Articles/>} />
       <Route path='/articles/:article_id' element={<SingleArticle />} />
-      <Route path='*' element={<Error message='Page does not exist' />}/>
+      <Route path='*' element={<Error message={'Page does not exist'} />}/>
     </Routes>
     </>
   )

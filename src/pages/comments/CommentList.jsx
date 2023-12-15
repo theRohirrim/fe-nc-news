@@ -14,7 +14,7 @@ const CommentList = (props) => {
         .then((commentsData) => {
             setComments(commentsData.comments)
         })
-    }, [comments])
+    }, [])
 
     return (
         <div id="comment-container">

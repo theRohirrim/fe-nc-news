@@ -103,7 +103,7 @@ const ArticleCard = (props) => {
                     <button id={`article-${article_id}-downvote-button`} onClick={handleVoteClick} className={`downvote-button ${downvoteClicked ? 'disabled-button' : ''}`}>-</button>
                 </div>
                 <p>{comment_count} comments</p>
-                <p>created {convertDateTime(created_at)} ago</p>
+                <p>created {convertDateTime(created_at)} {/\d/g.test(convertDateTime(created_at)) ? 'ago' : null}</p>
             </div>
             {props.children}
         </div>
