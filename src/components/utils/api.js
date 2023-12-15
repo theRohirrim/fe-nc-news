@@ -64,7 +64,7 @@ export const getArticles = (queries) => {
             urlSuffix += queryStrings.join('&')
         }
     }
-    
+
     return api.get(urlSuffix)
     .then((res) => {
         return res.data

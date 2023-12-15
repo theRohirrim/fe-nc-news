@@ -28,6 +28,10 @@ main {
   justify-content: space-evenly;
 }
 
+#sort-dropdown-container {
+  display: flex;
+}
+
 #article-container {
   border: 1px solid red;
 

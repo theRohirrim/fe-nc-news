@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { deleteCommentByCommentId, enableEnterPress, updateVotes } from "../../components/utils/api"
+import { convertDateTime, deleteCommentByCommentId, enableEnterPress, updateVotes } from "../../components/utils/api"
 
 const CommentCard = ({comment, setComments}) => {
     const [err, setErr] = useState(null)
@@ -96,7 +96,6 @@ const CommentCard = ({comment, setComments}) => {
         setComments((currentComments) => {
             fullComments = currentComments
             return currentComments.filter((comment) => {
-                console.log(comment.author, "comment_id ", comment.comment_id)
                 return comment.comment_id !== comment_id
             })
         })
