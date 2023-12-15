@@ -17,6 +17,7 @@ const ArticleFilter = ({ currentFilter, searchParams, setSearchParams }) => {
         {value: 'desc', label: 'descending'}
     ]
 
+    // Default options on select dropdowns will be what the search params are or just default search results
     const [selectDefaults, setDefaults] = useState({
         topicDefault: {value: searchParams.get('topic'), label: searchParams.get('topic') ? searchParams.get('topic') : 'all'},
 
@@ -29,6 +30,15 @@ const ArticleFilter = ({ currentFilter, searchParams, setSearchParams }) => {
 
     // Get topics to apply as options for the dropdown select
     useEffect(() => {
+        // Upon change to search parameters in dependancy array, reset defaults for the select options
+        setDefaults({
+            topicDefault: {value: searchParams.get('topic'), label: searchParams.get('topic') ? searchParams.get('topic') : 'all'},
+    
+            sortByDefault: {value: searchParams.get('sort_by'), label: searchParams.get('sort_by') ? sortByOptions.find((obj) => obj.value === searchParams.get('sort_by')).label : 'date'},
+    
+            orderDefault: {value: searchParams.get('order'), label: searchParams.get('order') ? orderOptions.find((obj) => obj.value === searchParams.get('order')).label : 'descending'}
+        })
+        
         getTopics()
         .then((topicsData) => {
             const topics = topicsData.topics.map((topic) => {
@@ -37,8 +47,12 @@ const ArticleFilter = ({ currentFilter, searchParams, setSearchParams }) => {
             setTopics([{value: '', label: 'all'}, ...topics])
         })
 
+        console.log("change to search params recognised")
+
         
     }, [searchParams])
+
+    console.log("current defaults", selectDefaults)
 
     const handleTopicChange = (selectedOption) => {
         // If topic is all, navigate to home page
@@ -59,7 +73,6 @@ const ArticleFilter = ({ currentFilter, searchParams, setSearchParams }) => {
         const newParams = new URLSearchParams(searchParams);
         
         if (['date', 'votes', 'comments'].includes(selectedOption.label)) {
-            console.log("recognises label")
             // Set the topic query
             newParams.set('sort_by', selectedOption.value);
 
