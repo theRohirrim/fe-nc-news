@@ -1,7 +1,7 @@
 const Error = (message) => {
 
     return (
-        <h1>Error: {message}</h1>
+        <h3>Error: {message}</h3>
     )
 }
 

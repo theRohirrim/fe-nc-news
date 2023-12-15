@@ -47,13 +47,8 @@ const ArticleFilter = ({ currentFilter, searchParams, setSearchParams }) => {
                 orderDefault: {value: searchParams.get('order'), label: searchParams.get('order') ? orderOptions.find((obj) => obj.value === searchParams.get('order')).label : 'descending'}
             })
         })
-
-        console.log("change to search params recognised")
-
         
     }, [searchParams])
-
-    console.log("current defaults", selectDefaults)
 
     const handleTopicChange = (selectedOption) => {
         // If topic is all, navigate to home page
