@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { convertDateTime, deleteCommentByCommentId, enableEnterPress, updateVotes } from "../../components/utils/api"
+import Error from "../../components/Error";
 
 const CommentCard = ({comment, setComments}) => {
     const [err, setErr] = useState(null)
@@ -124,7 +125,7 @@ const CommentCard = ({comment, setComments}) => {
             <p>{body}</p>
             <div className="comment-footer">
                 <div className="error-container">
-                {err ? <p>{err}</p> : null}
+                {err ? <Error message={err} /> : null}
                 </div>
             <div className="votes-container">
                 <p>{currentVotes} votes</p>

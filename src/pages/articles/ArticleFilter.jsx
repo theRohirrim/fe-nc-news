@@ -30,21 +30,22 @@ const ArticleFilter = ({ currentFilter, searchParams, setSearchParams }) => {
 
     // Get topics to apply as options for the dropdown select
     useEffect(() => {
-        // Upon change to search parameters in dependancy array, reset defaults for the select options
-        setDefaults({
-            topicDefault: {value: searchParams.get('topic'), label: searchParams.get('topic') ? searchParams.get('topic') : 'all'},
-    
-            sortByDefault: {value: searchParams.get('sort_by'), label: searchParams.get('sort_by') ? sortByOptions.find((obj) => obj.value === searchParams.get('sort_by')).label : 'date'},
-    
-            orderDefault: {value: searchParams.get('order'), label: searchParams.get('order') ? orderOptions.find((obj) => obj.value === searchParams.get('order')).label : 'descending'}
-        })
-        
         getTopics()
         .then((topicsData) => {
             const topics = topicsData.topics.map((topic) => {
                 return {value: topic.slug, label: topic.slug}
             })
             setTopics([{value: '', label: 'all'}, ...topics])
+        })
+        .then(() => {
+            // Upon change to search parameters in dependancy array, reset defaults for the select options
+            setDefaults({
+                topicDefault: {value: searchParams.get('topic'), label: searchParams.get('topic') ? searchParams.get('topic') : 'all'},
+        
+                sortByDefault: {value: searchParams.get('sort_by'), label: searchParams.get('sort_by') ? sortByOptions.find((obj) => obj.value === searchParams.get('sort_by')).label : 'date'},
+        
+                orderDefault: {value: searchParams.get('order'), label: searchParams.get('order') ? orderOptions.find((obj) => obj.value === searchParams.get('order')).label : 'descending'}
+            })
         })
 
         console.log("change to search params recognised")
