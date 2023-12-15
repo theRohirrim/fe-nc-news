@@ -36,18 +36,7 @@ const ArticleFilter = ({ searchParams, setSearchParams }) => {
                 return {value: topic.slug, label: topic.slug}
             })
             setTopics([{value: '', label: 'all'}, ...topics])
-        })
-        .then(() => {
-            // Upon change to search parameters in dependancy array, reset defaults for the select options
-            setDefaults({
-                topicDefault: {value: searchParams.get('topic'), label: searchParams.get('topic') ? searchParams.get('topic') : 'all'},
-        
-                sortByDefault: {value: searchParams.get('sort_by'), label: searchParams.get('sort_by') ? sortByOptions.find((obj) => obj.value === searchParams.get('sort_by')).label : 'date'},
-        
-                orderDefault: {value: searchParams.get('order'), label: searchParams.get('order') ? orderOptions.find((obj) => obj.value === searchParams.get('order')).label : 'descending'}
-            })
-        })
-        
+        })        
     }, [searchParams])
 
     const handleTopicChange = (selectedOption) => {
@@ -87,7 +76,7 @@ const ArticleFilter = ({ searchParams, setSearchParams }) => {
 
     return (
         <div id="article-filter">
-            <div id="topic-select-container">
+            <div id="topic-select-container" className="dropdown-container">
                 <h3>Topic</h3>
                 <Select 
                 id="topic-dropdown" 
@@ -96,7 +85,7 @@ const ArticleFilter = ({ searchParams, setSearchParams }) => {
                 defaultValue={selectDefaults.topicDefault} 
                 />
             </div>
-            <div id="sort-select-container">
+            <div id="sort-select-container" className="dropdown-container">
                 <h3>Sort By</h3>
                 <div id="sort-dropdown-container">
                     <Select 

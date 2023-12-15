@@ -122,18 +122,21 @@ const CommentCard = ({comment, setComments}) => {
                 <button className="enter-press" onClick={onDelete}>Delete</button>
             </div>
             }
-            <p>{body}</p>
+            <div className="comment-body">
+                <p>{body}</p>
+            </div>
             <div className="comment-footer">
                 <div className="error-container">
                 {err ? <Error message={err} /> : null}
                 </div>
-            <div className="votes-container">
-                <p>{currentVotes} votes</p>
-                <button id={`comment-${comment_id}-upvote-button`} onClick={handleVoteClick} className={`upvote-button enter-press ${upvoteClicked ? 'disabled-button' : ''}`}>+</button>
-                <button id={`comment-${comment_id}-downvote-button`} onClick={handleVoteClick} className={`downvote-button enter-press ${downvoteClicked ? 'disabled-button' : ''}`}>-</button>
-            </div>
-                <p>by {author}</p>
-                <p>created {convertDateTime(created_at)} {/\d/g.test(convertDateTime(created_at)) ? 'ago' : null}</p>
+                <div className="votes-container">
+                    <div className="vote-button-container">
+                        <button id={`comment-${comment_id}-upvote-button`} onClick={handleVoteClick} className={`upvote-button enter-press ${upvoteClicked ? 'disabled-button' : ''}`}>+</button>
+                        <button id={`comment-${comment_id}-downvote-button`} onClick={handleVoteClick} className={`downvote-button enter-press ${downvoteClicked ? 'disabled-button' : ''}`}>-</button>
+                    </div>
+                    <p>{currentVotes} votes</p>
+                </div>
+                <p>by {author} {convertDateTime(created_at)} {/\d/g.test(convertDateTime(created_at)) ? 'ago' : null}</p>
             </div>
         </div>
     )

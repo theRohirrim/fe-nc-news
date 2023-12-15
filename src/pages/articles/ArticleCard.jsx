@@ -96,14 +96,16 @@ const ArticleCard = (props) => {
                 <img src={article_img_url} />
             </Link>
             <div className="article-card-footer">
-                <div className="votes-container">
+                <div className="article-votes-container">
                     <p>{currentVotes} votes</p>
                     {err ? <Error message={err} /> : null}
                     <button id={`article-${article_id}-upvote-button`} onClick={handleVoteClick} className={`upvote-button ${upvoteClicked ? 'disabled-button' : ''}`}>+</button>
                     <button id={`article-${article_id}-downvote-button`} onClick={handleVoteClick} className={`downvote-button ${downvoteClicked ? 'disabled-button' : ''}`}>-</button>
                 </div>
-                <p>{comment_count} comments</p>
-                <p>created {convertDateTime(created_at)} {/\d/g.test(convertDateTime(created_at)) ? 'ago' : null}</p>
+                <div className="article-info">
+                    <p>{comment_count} comments</p>
+                    <p>created {convertDateTime(created_at)} {/\d/g.test(convertDateTime(created_at)) ? 'ago' : null}</p>
+                </div>
             </div>
             {props.children}
         </div>

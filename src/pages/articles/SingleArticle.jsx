@@ -24,14 +24,14 @@ const SingleArticle = () => {
     }
 
     return (
-        <>
+        <main>
         <ArticleCard article={article} linkActive={false}>
             <div className="article-body">
                 <p>{article.body}</p>
             </div>
         </ArticleCard>
         <CommentList article_id={article_id}/>
-        </>
+        </main>
     )
 
 }
