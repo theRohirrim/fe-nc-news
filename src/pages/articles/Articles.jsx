@@ -19,7 +19,6 @@ const Articles = () => {
                 order: searchParams.get('order')
             }
 
-
         })
     }, [searchParams])
 
@@ -29,10 +28,10 @@ const Articles = () => {
             setArticles(res.articles)
         })
     }, [currentFilter])
-
+    
     return (
         <main>
-            <ArticleFilter currentFilter={currentFilter} searchParams={searchParams} setSearchParams={setSearchParams}/>
+            <ArticleFilter searchParams={searchParams} setSearchParams={setSearchParams}/>
             <ArtcileList articles={articles}/>
         </main>
     )

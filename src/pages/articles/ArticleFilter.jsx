@@ -3,7 +3,7 @@ import { getTopics } from "../../components/utils/api"
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const ArticleFilter = ({ currentFilter, searchParams, setSearchParams }) => {
+const ArticleFilter = ({ searchParams, setSearchParams }) => {
     const [topicOptions, setTopics] = useState([])
 
     const sortByOptions = [
@@ -30,15 +30,6 @@ const ArticleFilter = ({ currentFilter, searchParams, setSearchParams }) => {
 
     // Get topics to apply as options for the dropdown select
     useEffect(() => {
-        // Upon change to search parameters in dependancy array, reset defaults for the select options
-        setDefaults({
-            topicDefault: {value: searchParams.get('topic'), label: searchParams.get('topic') ? searchParams.get('topic') : 'all'},
-    
-            sortByDefault: {value: searchParams.get('sort_by'), label: searchParams.get('sort_by') ? sortByOptions.find((obj) => obj.value === searchParams.get('sort_by')).label : 'date'},
-    
-            orderDefault: {value: searchParams.get('order'), label: searchParams.get('order') ? orderOptions.find((obj) => obj.value === searchParams.get('order')).label : 'descending'}
-        })
-        
         getTopics()
         .then((topicsData) => {
             const topics = topicsData.topics.map((topic) => {
@@ -46,13 +37,18 @@ const ArticleFilter = ({ currentFilter, searchParams, setSearchParams }) => {
             })
             setTopics([{value: '', label: 'all'}, ...topics])
         })
-
-        console.log("change to search params recognised")
-
+        .then(() => {
+            // Upon change to search parameters in dependancy array, reset defaults for the select options
+            setDefaults({
+                topicDefault: {value: searchParams.get('topic'), label: searchParams.get('topic') ? searchParams.get('topic') : 'all'},
+        
+                sortByDefault: {value: searchParams.get('sort_by'), label: searchParams.get('sort_by') ? sortByOptions.find((obj) => obj.value === searchParams.get('sort_by')).label : 'date'},
+        
+                orderDefault: {value: searchParams.get('order'), label: searchParams.get('order') ? orderOptions.find((obj) => obj.value === searchParams.get('order')).label : 'descending'}
+            })
+        })
         
     }, [searchParams])
-
-    console.log("current defaults", selectDefaults)
 
     const handleTopicChange = (selectedOption) => {
         // If topic is all, navigate to home page

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { convertDateTime, updateVotes } from "../../components/utils/api"
 import { Link } from "react-router-dom"
+import Error from "../../components/Error"
 
 const ArticleCard = (props) => {
     const [err, setErr] = useState(null)
@@ -97,12 +98,12 @@ const ArticleCard = (props) => {
             <div className="article-card-footer">
                 <div className="votes-container">
                     <p>{currentVotes} votes</p>
-                    {err ? <p>{err}</p> : null}
+                    {err ? <Error message={err} /> : null}
                     <button id={`article-${article_id}-upvote-button`} onClick={handleVoteClick} className={`upvote-button ${upvoteClicked ? 'disabled-button' : ''}`}>+</button>
                     <button id={`article-${article_id}-downvote-button`} onClick={handleVoteClick} className={`downvote-button ${downvoteClicked ? 'disabled-button' : ''}`}>-</button>
                 </div>
                 <p>{comment_count} comments</p>
-                <p>created {convertDateTime(created_at)} ago</p>
+                <p>created {convertDateTime(created_at)} {/\d/g.test(convertDateTime(created_at)) ? 'ago' : null}</p>
             </div>
             {props.children}
         </div>

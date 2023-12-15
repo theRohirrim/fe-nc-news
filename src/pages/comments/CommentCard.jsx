@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react"
 import { convertDateTime, deleteCommentByCommentId, enableEnterPress, updateVotes } from "../../components/utils/api"
+import Error from "../../components/Error";
 
 const CommentCard = ({comment, setComments}) => {
     const [err, setErr] = useState(null)
@@ -124,7 +125,7 @@ const CommentCard = ({comment, setComments}) => {
             <p>{body}</p>
             <div className="comment-footer">
                 <div className="error-container">
-                {err ? <p>{err}</p> : null}
+                {err ? <Error message={err} /> : null}
                 </div>
             <div className="votes-container">
                 <p>{currentVotes} votes</p>
@@ -132,7 +133,7 @@ const CommentCard = ({comment, setComments}) => {
                 <button id={`comment-${comment_id}-downvote-button`} onClick={handleVoteClick} className={`downvote-button enter-press ${downvoteClicked ? 'disabled-button' : ''}`}>-</button>
             </div>
                 <p>by {author}</p>
-                <p>created {convertDateTime(created_at)} ago</p>
+                <p>created {convertDateTime(created_at)} {/\d/g.test(convertDateTime(created_at)) ? 'ago' : null}</p>
             </div>
         </div>
     )

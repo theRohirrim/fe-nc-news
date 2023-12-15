@@ -30,6 +30,9 @@ export const convertDateTime = (dateTime) => {
     if (interval > 1) {
       return Math.floor(interval) + " minutes";
     }
+    if (isNaN(Math.floor(seconds))) {
+        return 'just now'
+    } 
     return Math.floor(seconds) + " seconds";
 }
 

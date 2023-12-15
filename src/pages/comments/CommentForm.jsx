@@ -34,6 +34,9 @@ const CommentForm = (props) => {
             setComments((currentComments) => {
                 return [comment, ...currentComments]
             })
+
+            // Clear input
+            setInput('')
     
             // Send api request in the background
             postCommentByArticleId(input, article_id, currentUser)
