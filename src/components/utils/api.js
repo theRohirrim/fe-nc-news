@@ -74,13 +74,12 @@ export const getLastPage = async (queries) => {
     let pageNum = 1
     let resultsNum = 10
 
-    console.log(urlSuffix)
-
     for (let index = 1; resultsNum > 9; index++) {
         const newUrl = `${urlSuffix}&p=${index}`
 
         await api.get(newUrl)
         .then((res) => {
+            console.log(res.data.articles)
             resultsNum = res.data.articles.length
             if (resultsNum !== 10) pageNum = index
         })
