@@ -48,6 +48,7 @@ const ArticleFilter = ({ searchParams, setSearchParams }) => {
             const newParams = new URLSearchParams(searchParams);
             // Set the topic query
             newParams.set('topic', selectedOption.value);
+            newParams.delete('p')
             setSearchParams(newParams);        
         }
     };

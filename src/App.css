@@ -104,6 +104,22 @@ main {
   justify-content: space-evenly;
 }
 
+#pagination {
+  display: flex;
+  justify-content: space-evenly;
+
+  font-size: 1.5em;
+
+  margin-left: 30vw;
+  margin-right: 30vw;
+}
+
+.clickable-page {
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 #comment-form-container {
   text-align: center;
   padding-bottom: 0.8vh;

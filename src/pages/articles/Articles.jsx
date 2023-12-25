@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 import ArticleFilter from "./ArticleFilter"
-import ArtcileList from "./ArticleList"
+import ArticleList from "./ArticleList"
 import { useSearchParams } from "react-router-dom"
-import { getArticles } from "../../components/utils/api"
+import { getArticles, getLastPage } from "../../components/utils/api"
+import Pagination from "./Pagination"
 
 const Articles = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -16,9 +17,9 @@ const Articles = () => {
                 ...currentFilter,
                 topic: searchParams.get('topic'),
                 sort_by: searchParams.get('sort_by'),
-                order: searchParams.get('order')
+                order: searchParams.get('order'),
+                p: searchParams.get('p')
             }
-
         })
     }, [searchParams])
 
@@ -32,7 +33,8 @@ const Articles = () => {
     return (
         <main>
             <ArticleFilter searchParams={searchParams} setSearchParams={setSearchParams}/>
-            <ArtcileList articles={articles}/>
+            <ArticleList articles={articles}/>
+            <Pagination currentFilter={currentFilter} searchParams={searchParams} setSearchParams={setSearchParams}/>
         </main>
     )
 }

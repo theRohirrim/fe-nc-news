@@ -52,6 +52,44 @@ export const enableEnterPress = () => {
     }
 }
 
+export const getLastPage = async (queries) => {
+    let urlSuffix = "/articles"
+
+    if (queries) {
+        if (Object.values(queries)) {
+            urlSuffix += '?'  
+
+            let queryStrings = []
+            for (const [key,value] of Object.entries(queries)) {
+                //if query is not page
+                if (key !== 'p') {
+                    if (value) queryStrings.push(`${key}=${value}`)
+                }
+            }
+
+            urlSuffix += queryStrings.join('&')
+        }
+    }
+
+    let pageNum = 1
+    let resultsNum = 10
+
+    console.log(urlSuffix)
+
+    for (let index = 1; resultsNum > 9; index++) {
+        const newUrl = `${urlSuffix}&p=${index}`
+
+        await api.get(newUrl)
+        .then((res) => {
+            resultsNum = res.data.articles.length
+            if (resultsNum !== 10) pageNum = index
+        })
+        
+    }
+
+    return pageNum
+}
+
 export const getArticles = (queries) => {
     let urlSuffix = "/articles"
 
