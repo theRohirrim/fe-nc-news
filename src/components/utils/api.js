@@ -79,7 +79,6 @@ export const getLastPage = async (queries) => {
 
         await api.get(newUrl)
         .then((res) => {
-            console.log(res.data.articles)
             resultsNum = res.data.articles.length
             if (resultsNum !== 10) pageNum = index
         })
